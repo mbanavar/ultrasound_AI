@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    line-height: 1.6;
+    text-align: center;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+h1, h2 {
+    color: #333;
+    text-align: center;
+}
+
+footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    font-size: 0.9em;
+    color: #666;
+}

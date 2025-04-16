@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{% static 'myapp/aboutstyles.css' %}">
+    <link rel="stylesheet" href="{% static 'myapp/navstyles.css' %}">
+</head>
+<body>
+    {% include 'myapp/navbar.html' %}
+    <div class="container">
+        <h1>About</h1>
+        <p>This tool is designed to help paramedics in the field to diagnose internal bleeding using ultrasound images. Time is of the essence and it is important to accurately determine the situation so that patients can be sent quickly and correctly to a treatment facility.</p>
+
+        <h3>How to Use</h3>
+        <p>1. Upload the ultrasound images using the Choose File and Upload buttons.</p>
+        <p>2. Process the image with the algorithm using the Process button.</p>
+        <p>3. Adjust the variables to create an output image that is the most accurate and clear.</p>
+
+        <h3>Development Team</h3>
+
+        <h4>Clarkson Senior Design Group</h4>
+        <p>Gabriel Adamson, Lucas Lasher, Tyler Nickels, and Daniel Wilson</p>
+
+        <h4>WPI Research Group</h4>
+        <p>Jennifer Chaves, John Peabody, and Lauren Simonian</p>
+
+        <h3>Consultants</h3>
+        <p>CU Prof. Mahesh Banavar and WPI Prof. Brenton Faber</p>
+
+        <h2>Disclaimer</h2>
+        <p>Last Updated: April 9, 2025</p>
+        <p>Please read carefully before downloading or using this application.</p>
+        <p>This application is not intended for commercial or professional use and was only made to show proof of concept. We welcome feedback, comments, and suggestions for improvements to the application.</p>
+    </div>
+</body>
+</html>

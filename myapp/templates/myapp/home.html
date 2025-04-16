@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EE412 Web App</title>
+    <link rel="stylesheet" href="{% static 'myapp/navstyles.css' %}">
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+</head>
+<body>
+{% include 'myapp/navbar.html' %}
+    <div class="main-container">
+        <div class="gallery-section">
+            <gallery-label>Gallery</gallery-label>
+            <div class="gallery-container">
+                {% for image in images %}
+                    <img src="{{ image.image.url }}" alt="Uploaded Image" class="gallery-image" data-id="{{ image.id }}">
+                {% endfor %}
+            </div>
+
+            <upload-label>Upload an Image:</upload-label>
+            <form id="upload-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="file-upload-wrapper">
+                    <label for="id_image">Choose File</label>
+                    <input type="file" name="image" id="id_image" required>
+                </div>
+                <div id="selected-file-name" class="file-name-display">No file selected</div>
+                <button type="submit" class="upload-button">Upload</button>
+            </form>
+            <form id="delete-form" method="POST" action="">
+                {% csrf_token %}
+                <button type="submit" class="custom-button delete-button" style="display: none;">Delete Selected Image</button>
+            </form>
+        </div>
+
+        <div class="display-section">
+            <h2>Selected Image</h2>
+            <img id="displayed-image" src="" alt="Click an image from the gallery to display it here" class="selected-image">
+            {% if processed_image %}
+                <h2>Processed Image</h2>
+                <img id="processed-image" src="data:image/png;base64,{{ processed_image }}" alt="Processed Image" class="processed-image">
+            {% endif %}
+        </div>
+
+        <div class="right-section">
+        <h2>Adjustable Variables</h2>
+            <form id="process-form" method="POST" action="">
+                {% csrf_token %}
+                <div class="slider-box">
+                    <div class="slider-container">
+                        <label for="kernel_size">Kernel Size</label>
+                        <span class="range-indicator">1 - 99 (Odd Numbers Only)</span>
+                        <input type="range" name="kernel_size" id="kernel_size" value="{{ kernel_size }}" step="2" min="1" max="99">
+                        <input type="number" name="kernel_size" id="kernel_size" value="{{ kernel_size }}" step="2" min="1" max="99">
+                    </div>
+                    <div class="slider-container">
+                        <label for="wavelet_thresh">Wavelet Threshold</label>
+                        <span class="range-indicator">.01 - 1.0</span>
+                        <input type="range" name="wavelet_thresh" id="wavelet_thresh" value="{{ wavelet_thresh }}" step="0.01" min="0.0" max="1.0">
+                        <input type="number" name="wavelet_thresh" id="wavelet_thresh" value="{{ wavelet_thresh }}" step="0.01" min="0.0" max="1.0">
+                    </div>
+                    <div class="slider-container">
+                        <label for="gaussian_coefficient">Gaussian Coefficient</label>
+                        <span class="range-indicator">0 - 16</span>
+                        <input type="range" name="gaussian_coefficient" id="gaussian_coefficient" value="{{ gaussian_coefficient }}" min="0" max="16">
+                        <input type="number" name="gaussian_coefficient" id="gaussian_coefficient" value="{{ gaussian_coefficient }}" min="0" max="16">
+                    </div>
+                    <div class="slider-container">
+                        <label for="canny_lower">Canny Lower Threshold</label>
+                        <span class="range-indicator">0 - 300</span>
+                        <input type="range" name="canny_lower" id="canny_lower" value="{{ canny_lower }}" min="0" max="300">
+                        <input type="number" name="canny_lower" id="canny_lower" value="{{ canny_lower }}" min="0" max="300">
+                    </div>
+                    <div class="slider-container">
+                        <label for="canny_upper">Canny Upper Threshold</label>
+                        <span class="range-indicator">0 - 300</span>
+                        <input type="range" name="canny_upper" id="canny_upper" value="{{ canny_upper }}" min="0" max="300">
+                        <input type="number" name="canny_upper" id="canny_upper" value="{{ canny_upper }}" min="0" max="300">
+                    </div>
+                    <div class="slider-container">
+                        <label for="line_boldness">Line Boldness</label>
+                        <span class="range-indicator">0 - 5</span>
+                        <input type="range" name="line_boldness" id="line_boldness" value="{{ line_boldness }}" min="0" max="5">
+                        <input type="number" name="line_boldness" id="line_boldness" value="{{ line_boldness }}" min="0" max="5">
+                    </div>
+                </div>
+
+                <button type="submit" class="process-button">Process Image</button>
+            </form>
+        </div>
+    </div>
+<script src="{% static 'myapp/home.js' %}"></script>
+</body>
+</html>
